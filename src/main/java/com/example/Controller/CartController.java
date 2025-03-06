@@ -37,7 +37,8 @@ public class CartController {
     @PutMapping("/addProduct/{cartId}")
     public String addProductToCart(@PathVariable UUID cartId, @RequestBody Product product){
         cartService.addProductToCart(cartId, product);
-        return ResponseEntity.ok("Product "+ product.getName() +" has been added to cart successfully").toString();
+       ;
+        return ResponseEntity.ok("Product "+ product.getName() +" has been added to cart"+ cartService.getCartByUserId(cartId)+" successfully").toString();
     }
     @PutMapping("/removeProduct/{cartId}")
     public String deleteProductFromCart(@PathVariable UUID cartId,  @RequestBody Product product) {

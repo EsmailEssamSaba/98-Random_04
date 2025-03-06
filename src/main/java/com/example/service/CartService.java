@@ -14,6 +14,9 @@ public class CartService extends MainService<Cart>{
     public CartService() {
         this.cartRepository = new CartRepository();
     }
+    public void save(Cart cart) {
+        cartRepository.save(cart);
+    }
     public Cart addCart(Cart cart){
         return cartRepository.addCart(cart);
     }
@@ -32,6 +35,9 @@ public class CartService extends MainService<Cart>{
     }
     public void deleteProductFromCart(UUID cartId, Product product){
         cartRepository.deleteProductFromCart(cartId,product);
+    }
+    public void emptyCart(UUID cartId){
+        cartRepository.emptyCart(cartId);
     }
     public void deleteCartById(UUID cartId){
         cartRepository.deleteCartById(cartId);

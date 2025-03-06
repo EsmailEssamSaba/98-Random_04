@@ -1,7 +1,7 @@
 package com.example.Controller;
-import com.example.model.Cart;
+
 import com.example.model.Product;
-import com.example.service.CartService;
+
 import com.example.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

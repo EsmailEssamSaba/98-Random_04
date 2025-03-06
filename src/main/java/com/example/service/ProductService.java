@@ -1,7 +1,7 @@
 package com.example.service;
 import com.example.repository.ProductRepository;
 import org.springframework.stereotype.Service;
-import com.example.model.Cart;
+
 import com.example.model.Product;
 
 import java.util.ArrayList;

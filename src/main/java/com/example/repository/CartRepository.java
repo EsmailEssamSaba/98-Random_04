@@ -2,8 +2,7 @@ package com.example.repository;
 import com.example.model.Cart;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.UUID;
 import com.example.model.Product;
 
@@ -23,6 +22,18 @@ public class CartRepository extends MainRepository<Cart> {
         return Cart[].class;
     }
     public Cart addCart(Cart cart){ super.save(cart); return cart; }
+    public void save(Cart cart) {
+        ArrayList<Cart> carts = super.findAll();
+
+        // Remove the old version of the cart if it exists
+        carts.removeIf(c -> c.getId().equals(cart.getId()));
+
+        // Add the updated cart back
+        carts.add(cart);
+
+        // Save all carts back to the database
+       super. saveAll(carts);
+    }
 
 
 
@@ -69,6 +80,15 @@ public class CartRepository extends MainRepository<Cart> {
                super.saveAll(carts);
 
                 break;
+            }
+        }
+    }
+    public void emptyCart(UUID cartId) {
+        ArrayList<Cart> carts = getCarts();
+        for (Cart cart : carts) {
+            if (cart.getUserId().equals(cartId)) {
+                cart.getProducts().clear();
+                super.saveAll(carts); ;
             }
         }
     }
