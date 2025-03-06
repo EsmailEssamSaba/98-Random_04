@@ -1,6 +1,6 @@
 package com.example.Controller;
-import com.example.model.CartModel;
-import com.example.model.ProductModel;
+import com.example.model.Cart;
+import com.example.model.Product;
 import com.example.service.CartService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,29 +17,29 @@ public class CartController {
     public CartController() {this.cartService = new CartService();}
 
     @PostMapping("/")
-    public CartModel addCart(@RequestBody CartModel cart){
+    public Cart addCart(@RequestBody Cart cart){
         return cartService.addCart(cart);
     }
 
     @GetMapping("/")
-    public ArrayList<CartModel> getCarts(){
-        return cartService.getAllCarts();
+    public ArrayList<Cart> getCarts(){
+        return cartService.getCarts();
     }
 
     @GetMapping("/{cartId}")
-    public CartModel getCartById(@PathVariable UUID cartId){
+    public Cart getCartById(@PathVariable UUID cartId){
         return cartService.getCartById(cartId);
     }
 
     @PutMapping("/addProduct/{cartId}")
-    public String addProductToCart(@PathVariable UUID cartId, @RequestBody ProductModel product){
+    public String addProductToCart(@PathVariable UUID cartId, @RequestBody Product product){
         cartService.addProductToCart(cartId, product);
         return ResponseEntity.ok("Product "+ product.getName() +" has been added to cart successfully").toString();
     }
-    @PutMapping("/removeProduct/{userId}")
-    public String deleteProductFromCart(@PathVariable UUID userId,  @RequestBody ProductModel product) {
+    @PutMapping("/removeProduct/{cartId}")
+    public String deleteProductFromCart(@PathVariable UUID cartId,  @RequestBody Product product) {
 
-        cartService.deleteProductFromCart(userId, product);
+        cartService.deleteProductFromCart(cartId, product);
         return ResponseEntity.ok("Product "+ product.getName() +" has been removed from cart successfully").toString();
     }
     @DeleteMapping("/delete/{cartId}")

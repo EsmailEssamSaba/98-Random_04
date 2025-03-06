@@ -1,4 +1,4 @@
 package com.example.model;
 
-public class UserModel {
+public class Order {
 }

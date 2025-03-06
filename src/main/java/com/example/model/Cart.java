@@ -1,52 +1,49 @@
 package com.example.model;
-
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Component
-public class CartModel {
+public class Cart {
     private UUID id;
     private UUID userId;
-    private List<ProductModel> products=new ArrayList<>();
+    private List<Product> products=new ArrayList<>();
 
-    public CartModel(){
-
+    public Cart(){
     }
-    public CartModel(UUID id, UUID userId, List<ProductModel> products) {
+    public Cart(UUID id, UUID userId, List<Product> products) {
         this.id = id;
-        this.userId = userId;//needs to be cartId
+        this.userId = userId;
         this.products = products;
     }
 
-    public CartModel(UUID userId, List<ProductModel> products) {
-        this.userId = userId; //needs to be cartId
+    public Cart(UUID userId, List<Product> products) {
+        this.userId = userId;
         this.products = products;
     }
 
     public UUID getId() {
-        return userId;
-    }//needs to be cartId
+        return id;
+    }
 
     public void setId(UUID id) {
         this.id = id;
     }
 
     public UUID getUserId() {
-        return userId;//needs to be cartId
+        return userId;
     }
 
     public void setUserId(UUID userId) {
         this.userId = userId;
-    }//needs to be cartId
+    }
 
-    public List<ProductModel> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductModel> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }

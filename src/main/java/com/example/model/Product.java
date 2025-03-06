@@ -3,19 +3,19 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class ProductModel {
+public class Product {
     private UUID id;
     private String name;
     private double price;
 
-    public ProductModel() {
+    public Product() {
     }
-    public ProductModel(UUID id, String name, double price) {
+    public Product(UUID id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
-    public ProductModel(String name, double price) {
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }
