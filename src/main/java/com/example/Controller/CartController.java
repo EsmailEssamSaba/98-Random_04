@@ -18,6 +18,9 @@ public class CartController {
 
     @PostMapping("/")
     public Cart addCart(@RequestBody Cart cart){
+        if (cart.getId() == null) {
+            cart.setId(UUID.randomUUID());
+        }
         return cartService.addCart(cart);
     }
 
