@@ -5,6 +5,7 @@ import com.example.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -17,6 +18,8 @@ public class OrderService extends MainService<Order> {
     }
 
     public void addOrder(Order order) {
+        Objects.requireNonNull(order, "Order cannot be null");
+
         if (order.getId() == null) {
             order.setId(UUID.randomUUID());
         }
@@ -29,14 +32,17 @@ public class OrderService extends MainService<Order> {
     }
 
     public Order getOrderById(UUID orderId) {
+        Objects.requireNonNull(orderId, "Order ID cannot be null");
         return orderRepository.getOrderById(orderId);
     }
 
-    public void deleteOrderById(UUID orderId) throws IllegalArgumentException {
+    public void deleteOrderById(UUID orderId) {
+        Objects.requireNonNull(orderId, "Order ID cannot be null");
+
         try {
             orderRepository.deleteOrderById(orderId);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Can not delete order with ID: " + orderId.toString(), e);
+            throw new IllegalArgumentException("Cannot delete order with ID: " + orderId, e);
         }
     }
 }
