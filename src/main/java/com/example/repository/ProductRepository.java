@@ -32,23 +32,23 @@ public class ProductRepository extends MainRepository<Product> {
         }
         return null;
     }
-        public Product updateProduct(UUID productId, String newName, double newPrice){
-            ArrayList<Product> products = getProducts();
-            for (Product product : products) {
-                if (productId.equals(product.getId())) {
-                    product.setName(newName);
-                    product.setPrice(newPrice);
-                    super.saveAll(products);
-                    break;
+            public Product updateProduct(UUID productId, String newName, double newPrice){
+                ArrayList<Product> products = getProducts();
+                for (Product product : products) {
+                    if (productId.equals(product.getId())) {
+                        product.setName(newName);
+                        product.setPrice(newPrice);
+                        super.saveAll(products);
+                        break;
 
+
+                    }
 
                 }
 
+
+                 return getProductById(productId);
             }
-
-
-             return getProductById(productId);
-        }
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
         ArrayList<Product> products = getProducts();
 

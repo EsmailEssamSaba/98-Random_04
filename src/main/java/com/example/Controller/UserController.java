@@ -55,19 +55,19 @@ public class UserController {
          userService.emptyCart(userId);
 
 
-        return ResponseEntity.ok("Order has been added to user "+ x.getName()+" successfully").toString();
+        return "Order added successfully";
 
     }
 
     @PostMapping("/{userId}/removeOrder")
     public String removeOrderFromUser(@PathVariable UUID userId, @RequestParam UUID orderId){
         userService.removeOrderFromUser(userId, orderId);
-        return ResponseEntity.ok("Order has been removed from "+userId+"successfully").toString();
+        return "Order removed successfully";
     }
     @DeleteMapping("/{userId}/emptyCart")
     public String emptyCart(@PathVariable UUID userId){
         userService.emptyCart(userId);
-        return ResponseEntity.ok("Cart is empty").toString();
+        return "Cart emptied successfully";
     }
     @PutMapping("/addProductToCart")
     public String addProductToCart(@RequestParam UUID userId, @RequestParam UUID productId){
@@ -87,18 +87,30 @@ public class UserController {
         }
         cartService.addProductToCart(cart.getId(), product);
 
-        return ResponseEntity.ok("Product "+ productService.getProductById(productId).getName()+" has been added to "+cart.getId() +" successfully").toString();
+        return "Product added to cart" ;
 
     }
     @PutMapping("/deleteProductFromCart")
     public String deleteProductFromCart(@RequestParam UUID userId, @RequestParam UUID productId){
+        Cart cart = cartService.getCartByUserId(userId);
+        if (cart == null) {
+            return "Cart is empty";
+        }
+        if (cart.getProducts() == null) {
+            return "Cart is empty";
+        }
+
         cartService.deleteProductFromCart(userId,productService.getProductById(productId));
-        return ResponseEntity.ok("Product "+ productId+" has been deleted successfully").toString();
+        return "Product deleted from cart";
     }
     @DeleteMapping("/delete/{userId}")
     public String deleteUserById(@PathVariable UUID userId){
+        User user=userService.getUserById(userId);
+        if (user==null){
+            return "User not found";
+        }
         userService.deleteUserById(userId);
-        return ResponseEntity.ok("User has been deleted successfully").toString();
+        return "User deleted successfully";
     }
 
 }

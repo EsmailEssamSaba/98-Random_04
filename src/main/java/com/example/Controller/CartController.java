@@ -38,18 +38,18 @@ public class CartController {
     public String addProductToCart(@PathVariable UUID cartId, @RequestBody Product product){
         cartService.addProductToCart(cartId, product);
        ;
-        return ResponseEntity.ok("Product "+ product.getName() +" has been added to cart"+ cartService.getCartByUserId(cartId)+" successfully").toString();
+        return "Product added to cart";
     }
     @PutMapping("/removeProduct/{cartId}")
     public String deleteProductFromCart(@PathVariable UUID cartId,  @RequestBody Product product) {
 
         cartService.deleteProductFromCart(cartId, product);
-        return ResponseEntity.ok("Product "+ product.getName() +" has been removed from cart successfully").toString();
+        return "Product deleted from cart";
     }
     @DeleteMapping("/delete/{cartId}")
     public String deleteCartById(@PathVariable UUID cartId){
         cartService.deleteCartById(cartId);
-        return ResponseEntity.ok("Cart "+ cartId +" has been removed successfully").toString();
+        return "Cart deleted successfully";
     }
 
 }

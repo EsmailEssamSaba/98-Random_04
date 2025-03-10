@@ -36,6 +36,7 @@ public class ProductController {
     }
     @PutMapping("/update/{productId}")
     public Product updateProduct(@PathVariable UUID productId, @RequestBody Map<String,Object> body){
+        System.out.println("Request Body: " + body.toString());
         String newName = (String) body.get("name");
         double newPrice = ((Number) body.get("price")).doubleValue();
         return   productService.updateProduct(productId, newName, newPrice);
@@ -44,12 +45,12 @@ public class ProductController {
     @PutMapping("/applyDiscount")
     public String applyDiscount(@RequestParam double discount,@RequestBody ArrayList<UUID>productIds){
         productService.applyDiscount(discount, productIds);
-        return ResponseEntity.ok("Products  has been discounted successfully").toString();
+        return "Discount applied successfully";
     }
     @DeleteMapping("/delete/{productId}")
     public String deleteProductById(@PathVariable UUID productId){
         productService.deleteProductById(productId);
-        return ResponseEntity.ok("Product "+ productId+" has been deleted successfully").toString();
+        return "Product deleted successfully";
     }
 
 
