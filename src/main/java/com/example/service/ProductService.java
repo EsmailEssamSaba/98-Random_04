@@ -44,8 +44,8 @@ public class ProductService extends MainService<Product> {
     }
 
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
-        if (discount < 0 || discount > 1) {
-            throw new IllegalArgumentException("Discount must be between 0 and 1");
+        if (discount < 0) {
+            throw new IllegalArgumentException("Discount cannot be negative");
         }
         Objects.requireNonNull(productIds, "Product IDs list cannot be null");
 
