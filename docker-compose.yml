@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  my-app:
+    image: miniproject1
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/main/java/com/example/data:/app/src/main/java/com/example/data
